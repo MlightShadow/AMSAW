@@ -1,0 +1,14 @@
+.nav-list-box {
+  font-weight: bold;
+}
+.nav-list-box .van-cell__title {
+  font-size: 16px;
+}
+.nav-list-box .van-collapse-item__content {
+  padding: 0;
+}
+.nav-list-box .van-collapse-item__content .van-hairline--top::after,
+.nav-list-box .van-collapse-item__content .van-grid-item__content::after {
+  border: none;
+  border-top-width: 0;
+}
