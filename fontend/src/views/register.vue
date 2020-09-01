@@ -47,11 +47,10 @@
 </template>
 
 <script>
-import {form} from "vant"
-
+import { form } from "vant";
 
 export default {
-  components:{
+  components: {
     "van-form": form,
   },
   data() {
@@ -63,7 +62,21 @@ export default {
     };
   },
   methods: {
-    onSubmit() {},
+    onSubmit() {
+      this.api
+        .register({
+          username: this.username,
+          regmail: this.email,
+          password: this.password,
+        })
+        .then((res) => {
+          if (res.code === 200) {
+            this.$toast.info("注册成功");
+          } else {
+            this.$toast.fail("注册失败");
+          }
+        });
+    },
   },
 };
 </script>

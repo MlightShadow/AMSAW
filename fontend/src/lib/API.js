@@ -10,5 +10,5 @@ export default {
     // ----------------------------------用户-----------------------------------
     // example:    login: obj => request('/user/mobileLogin/' + obj.loginName, "post", obj),
 
-    register: obj => request("/api/register", "post", obj),
+    register: obj => request("/api/account/register", "post", obj),
 }
