@@ -13,7 +13,7 @@
     </van-nav-bar>
     <van-tabbar v-model="active" :fixed="true">
       <van-tabbar-item icon="home-o" to="/index" name="index">站点首页</van-tabbar-item>
-      <van-tabbar-item icon="location-o" to="/register" name="register">艾星向导</van-tabbar-item>
+      <van-tabbar-item icon="location-o" to="/register" name="register">账号注册</van-tabbar-item>
       <van-tabbar-item icon="setting-o" to="/tools" name="tools">自助工具</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="/mine" name="mine">账户管理</van-tabbar-item>
     </van-tabbar>

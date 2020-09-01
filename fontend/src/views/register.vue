@@ -13,15 +13,21 @@
         v-model="username"
         name="username"
         label="测试账户名"
-        placeholder="请使用数字和字母的组合..."
-        :rules="[{ required: true, message: '请填写用户名' }]"
+        placeholder="用户名"
+        required
+        :rules="[{ required: true, message: '请填写用户名' },
+        {
+          pattern: namePattern, message: '请使用6-16位数字和字母的组合'
+        }]"
       />
       <van-field
         v-model="email"
         name="email"
         label="绑定邮箱"
-        placeholder="请确认正确, 当前没有校验机制"
-        :rules="[{ required: true, message: '请填写邮箱' }]"
+        placeholder="邮箱"
+        required
+        :rules="[{ required: true, message: '请填写邮箱' }, {
+      pattern:mailpattern, message: '这可能不是一个正确的邮箱' }]"
       />
       <van-field
         v-model="password"
@@ -29,6 +35,7 @@
         type="password"
         label="密码"
         placeholder="密码"
+        required
         :rules="[{ required: true, message: '请填写密码' }]"
       />
       <van-field
@@ -36,32 +43,33 @@
         type="password"
         name="password2"
         label="再次确认密码"
-        placeholder="请再次输入密码"
-        :rules="[{ required: true, message: '请再次确认密码' }]"
+        placeholder="再次输入密码"
+        required
+        :rules="[{validator, message: '两次密码输入不一致' }]"
       />
       <div style="margin: 15px;">
-        <van-button round block type="info" native-type="submit">提交</van-button>
+        <van-button round block type="info" native-type="submit">立即注册</van-button>
       </div>
     </van-form>
   </div>
 </template>
 
 <script>
-import { form } from "vant";
-
 export default {
-  components: {
-    "van-form": form,
-  },
   data() {
     return {
       username: "",
       email: "",
       password: "",
       password2: "",
+      mailpattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      namePattern: /^[A-Za-z0-9]{6,16}$/,
     };
   },
   methods: {
+    validator(val) {
+      return this.password === val;
+    },
     onSubmit() {
       this.api
         .register({
@@ -71,9 +79,13 @@ export default {
         })
         .then((res) => {
           if (res.code === 200) {
-            this.$toast.info("注册成功");
+            this.$toast.success("注册成功");
+            this.username = "";
+            this.email = "";
+            this.password = "";
+            this.password2 = "";
           } else {
-            this.$toast.fail("注册失败");
+            this.$toast.fail(res.message);
           }
         });
     },

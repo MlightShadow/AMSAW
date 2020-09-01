@@ -1,15 +1,15 @@
 <template>
-  <div>账户管理</div>
+  <div>
+    <van-empty description="账户管理, 开发中..." />
+  </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

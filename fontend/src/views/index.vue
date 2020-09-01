@@ -9,11 +9,10 @@
       left-icon="volume-o"
       text="本服为[Trinity Core]公益测试服务器, 测试结果会反映到TC官方以便对程序进行修改, 禁止任何以本服进行牟利行为, 一旦发现永久撤销其测试资格, 当前服务器状态还未稳定, 请勿频繁登录"
     />
-    <van-grid :column-num="1" gutter="2px" >
-      <van-grid-item >开发中...</van-grid-item>
-      <van-grid-item ></van-grid-item>
-      <van-grid-item ></van-grid-item>
-      <van-grid-item ></van-grid-item>
+    <van-grid :column-num="1" gutter="2px">
+      <van-grid-item>
+        <van-empty description="开发中..." />
+      </van-grid-item>
     </van-grid>
   </div>
 </template>
