@@ -131,7 +131,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         // registry.addMapping("/**");
         //registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods("GET", "POST", "DELETE", "PUT").maxAge(3600);
         registry.addMapping("/**")
-                .allowedOrigins("http://100.100.200.90:80")
+                .allowedOrigins("*")
                 .allowedMethods("GET","HEAD","POST","PUT","DELETE","OPTIONS")
                 .maxAge(3600)
                 .allowedHeaders("*");
