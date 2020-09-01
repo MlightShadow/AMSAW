@@ -6,18 +6,27 @@ import io.swagger.annotations.ApiModelProperty;
  * Created by CodeGenerator on 2019/03/28.
  */
 public class RegisterDTO {
-    @ApiModelProperty(value = "帐号名")
-    private String name;
-
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(value="用户名")
+    private String username;
+    @ApiModelProperty(value="注册邮箱")
+    private String regmail;
+    @ApiModelProperty(value="密码")
     private String password;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRegmail() {
+        return regmail;
+    }
+
+    public void setRegmail(String regmail) {
+        this.regmail = regmail;
     }
 
     public String getPassword() {

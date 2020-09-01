@@ -36,11 +36,13 @@ public class AccountController {
     @NeedApiLog
     @ApiOperation(value = "注册")
     @PostMapping("/register")
+    @TargetDataSource("auth")
     public Result<?> register(@RequestBody RegisterDTO dto) {
         return ResultGenerator.genSuccessResult(accountService.addAccount(dto));
     }
 
     @NeedApiLog
+    @ApiIgnore
     @ApiOperation(value = "删除")
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable String id) {
@@ -48,6 +50,7 @@ public class AccountController {
     }
 
     @NeedApiLog
+    @ApiIgnore
     @ApiOperation(value = "更新")
     @PutMapping("/{id}")
     public Result<?> update(@PathVariable String id, @RequestBody AccountDTO dto) {
@@ -64,6 +67,7 @@ public class AccountController {
     }
 
     @ApiOperation(value = "详情")
+    @ApiIgnore
     @GetMapping("/{id}")
     public Result<?> detail(@PathVariable String id) {
         Account account = accountService.findById(id);
@@ -71,6 +75,7 @@ public class AccountController {
     }
 
     @ApiOperation(value = "列表")
+    @ApiIgnore
     @GetMapping
     public Result<?> list(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "0") Integer size) {

@@ -17,10 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 文件控制器
  */
+@ApiIgnore
 @Api(description = "文件")
 @RestController
 @RequestMapping("/file")

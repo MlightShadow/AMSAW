@@ -5,18 +5,16 @@ import com.company.project.dto.account.AccountDTO;
 import com.company.project.dto.account.RegisterDTO;
 import com.company.project.model.Account;
 import com.company.project.service.AccountService;
-import com.company.project.util.MD5Util;
-import com.company.project.util.UUIDUtil;
+import com.company.project.util.EncodeUtil;
 import com.company.project.core.AbstractService;
 import com.company.project.core.ServiceException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tk.mybatis.mapper.entity.Condition;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -30,18 +28,12 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     @Resource
     private AccountMapper accountMapper;
 
-    @Autowired
-    private UUIDUtil uuid;
-
-    @Autowired
-    private MD5Util MD5;
-
     @Override
     public Account addAccount(RegisterDTO dto) {
 
         // 判断用户名是否存在
         Condition condition = new Condition(Account.class);
-        condition.createCriteria().andCondition("name=", dto.getName());
+        condition.createCriteria().andCondition("username=", dto.getUsername());
         List<Account> list = this.findByCondition(condition);
 
         if (list.size() > 0) {
@@ -49,14 +41,16 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
         }
 
         Account account = new Account();
-        account.setId(uuid.getUUID());
-        account.setIsDeleted(false);
-        account.setCreator(account.getId()); //自己创建
-        account.setCreateTime(new Date());
 
-        account.setName(dto.getName());
+        byte bexpansion = 0;
+        Byte expansion = new Byte(bexpansion);
+        account.setRegMail(dto.getRegmail());
+        account.setEmail(dto.getRegmail());
+        account.setExpansion(expansion);
+        account.setUsername(dto.getUsername());
         try {
-            account.setPassword(MD5.md5(dto.getPassword()));
+            account.setShaPassHash(EncodeUtil
+                    .sha1(StringUtils.upperCase(dto.getUsername()) + ":" + StringUtils.upperCase(dto.getPassword())));
         } catch (Exception e) {
             throw new ServiceException("系统异常");
         }
@@ -72,8 +66,6 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     @Override
     public int updateAccount(String id, AccountDTO dto) {
         Account account = new Account();
-        account.setId(id);
-        account.setName(dto.getName());
 
         int rows = this.update(account);
         if (rows == 1) {
@@ -86,8 +78,6 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     @Override
     public int deleteAccount(String id) {
         Account account = new Account();
-        account.setId(id);
-        account.setIsDeleted(true);
         int rows = this.update(account);
         if (rows == 1) {
             return rows;

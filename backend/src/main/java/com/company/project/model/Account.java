@@ -4,188 +4,454 @@ import java.util.Date;
 import javax.persistence.*;
 
 public class Account {
+    /**
+     * Identifier
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
-    @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private String username;
 
-    private String creator;
+    @Column(name = "sha_pass_hash")
+    private String shaPassHash;
 
-    @Column(name = "create_time")
-    private Date createTime;
+    private String v;
+
+    private String s;
+
+    private String email;
+
+    @Column(name = "reg_mail")
+    private String regMail;
+
+    private Date joindate;
+
+    @Column(name = "last_ip")
+    private String lastIp;
+
+    @Column(name = "last_attempt_ip")
+    private String lastAttemptIp;
+
+    @Column(name = "failed_logins")
+    private Integer failedLogins;
+
+    private Byte locked;
+
+    @Column(name = "lock_country")
+    private String lockCountry;
+
+    @Column(name = "last_login")
+    private Date lastLogin;
+
+    private Byte online;
+
+    private Byte expansion;
+
+    private Long mutetime;
+
+    private String mutereason;
+
+    private String muteby;
+
+    private Byte locale;
+
+    private String os;
+
+    private Integer recruiter;
+
+    private byte[] salt;
+
+    private byte[] verifier;
+
+    @Column(name = "session_key_auth")
+    private byte[] sessionKeyAuth;
+
+    @Column(name = "session_key_bnet")
+    private byte[] sessionKeyBnet;
+
+    @Column(name = "totp_secret")
+    private byte[] totpSecret;
 
     /**
-     * 帐户名
+     * 获取Identifier
+     *
+     * @return id - Identifier
      */
-    private String name;
-
-    /**
-     * 昵称
-     */
-    @Column(name = "nick_name")
-    private String nickName;
-
-    /**
-     * 头像
-     */
-    private String avatar;
-
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 最近登录时间
-     */
-    @Column(name = "last_login_time")
-    private Date lastLoginTime;
-
-    /**
-     * @return id
-     */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
-     * @param id
+     * 设置Identifier
+     *
+     * @param id Identifier
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * @return is_deleted
+     * @return username
      */
-    public Boolean getIsDeleted() {
-        return isDeleted;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param isDeleted
+     * @param username
      */
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * @return creator
+     * @return sha_pass_hash
      */
-    public String getCreator() {
-        return creator;
+    public String getShaPassHash() {
+        return shaPassHash;
     }
 
     /**
-     * @param creator
+     * @param shaPassHash
      */
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setShaPassHash(String shaPassHash) {
+        this.shaPassHash = shaPassHash;
     }
 
     /**
-     * @return create_time
+     * @return v
      */
-    public Date getCreateTime() {
-        return createTime;
+    public String getV() {
+        return v;
     }
 
     /**
-     * @param createTime
+     * @param v
      */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setV(String v) {
+        this.v = v;
     }
 
     /**
-     * 获取帐户名
-     *
-     * @return name - 帐户名
+     * @return s
      */
-    public String getName() {
-        return name;
+    public String getS() {
+        return s;
     }
 
     /**
-     * 设置帐户名
-     *
-     * @param name 帐户名
+     * @param s
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setS(String s) {
+        this.s = s;
     }
 
     /**
-     * 获取昵称
-     *
-     * @return nick_name - 昵称
+     * @return email
      */
-    public String getNickName() {
-        return nickName;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * 设置昵称
-     *
-     * @param nickName 昵称
+     * @param email
      */
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
-     * 获取头像
-     *
-     * @return avatar - 头像
+     * @return reg_mail
      */
-    public String getAvatar() {
-        return avatar;
+    public String getRegMail() {
+        return regMail;
     }
 
     /**
-     * 设置头像
-     *
-     * @param avatar 头像
+     * @param regMail
      */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setRegMail(String regMail) {
+        this.regMail = regMail;
     }
 
     /**
-     * 获取密码
-     *
-     * @return password - 密码
+     * @return joindate
      */
-    public String getPassword() {
-        return password;
+    public Date getJoindate() {
+        return joindate;
     }
 
     /**
-     * 设置密码
-     *
-     * @param password 密码
+     * @param joindate
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setJoindate(Date joindate) {
+        this.joindate = joindate;
     }
 
     /**
-     * 获取最近登录时间
-     *
-     * @return last_login_time - 最近登录时间
+     * @return last_ip
      */
-    public Date getLastLoginTime() {
-        return lastLoginTime;
+    public String getLastIp() {
+        return lastIp;
     }
 
     /**
-     * 设置最近登录时间
-     *
-     * @param lastLoginTime 最近登录时间
+     * @param lastIp
      */
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+    public void setLastIp(String lastIp) {
+        this.lastIp = lastIp;
+    }
+
+    /**
+     * @return last_attempt_ip
+     */
+    public String getLastAttemptIp() {
+        return lastAttemptIp;
+    }
+
+    /**
+     * @param lastAttemptIp
+     */
+    public void setLastAttemptIp(String lastAttemptIp) {
+        this.lastAttemptIp = lastAttemptIp;
+    }
+
+    /**
+     * @return failed_logins
+     */
+    public Integer getFailedLogins() {
+        return failedLogins;
+    }
+
+    /**
+     * @param failedLogins
+     */
+    public void setFailedLogins(Integer failedLogins) {
+        this.failedLogins = failedLogins;
+    }
+
+    /**
+     * @return locked
+     */
+    public Byte getLocked() {
+        return locked;
+    }
+
+    /**
+     * @param locked
+     */
+    public void setLocked(Byte locked) {
+        this.locked = locked;
+    }
+
+    /**
+     * @return lock_country
+     */
+    public String getLockCountry() {
+        return lockCountry;
+    }
+
+    /**
+     * @param lockCountry
+     */
+    public void setLockCountry(String lockCountry) {
+        this.lockCountry = lockCountry;
+    }
+
+    /**
+     * @return last_login
+     */
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    /**
+     * @param lastLogin
+     */
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    /**
+     * @return online
+     */
+    public Byte getOnline() {
+        return online;
+    }
+
+    /**
+     * @param online
+     */
+    public void setOnline(Byte online) {
+        this.online = online;
+    }
+
+    /**
+     * @return expansion
+     */
+    public Byte getExpansion() {
+        return expansion;
+    }
+
+    /**
+     * @param expansion
+     */
+    public void setExpansion(Byte expansion) {
+        this.expansion = expansion;
+    }
+
+    /**
+     * @return mutetime
+     */
+    public Long getMutetime() {
+        return mutetime;
+    }
+
+    /**
+     * @param mutetime
+     */
+    public void setMutetime(Long mutetime) {
+        this.mutetime = mutetime;
+    }
+
+    /**
+     * @return mutereason
+     */
+    public String getMutereason() {
+        return mutereason;
+    }
+
+    /**
+     * @param mutereason
+     */
+    public void setMutereason(String mutereason) {
+        this.mutereason = mutereason;
+    }
+
+    /**
+     * @return muteby
+     */
+    public String getMuteby() {
+        return muteby;
+    }
+
+    /**
+     * @param muteby
+     */
+    public void setMuteby(String muteby) {
+        this.muteby = muteby;
+    }
+
+    /**
+     * @return locale
+     */
+    public Byte getLocale() {
+        return locale;
+    }
+
+    /**
+     * @param locale
+     */
+    public void setLocale(Byte locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * @return os
+     */
+    public String getOs() {
+        return os;
+    }
+
+    /**
+     * @param os
+     */
+    public void setOs(String os) {
+        this.os = os;
+    }
+
+    /**
+     * @return recruiter
+     */
+    public Integer getRecruiter() {
+        return recruiter;
+    }
+
+    /**
+     * @param recruiter
+     */
+    public void setRecruiter(Integer recruiter) {
+        this.recruiter = recruiter;
+    }
+
+    /**
+     * @return salt
+     */
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    /**
+     * @param salt
+     */
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    /**
+     * @return verifier
+     */
+    public byte[] getVerifier() {
+        return verifier;
+    }
+
+    /**
+     * @param verifier
+     */
+    public void setVerifier(byte[] verifier) {
+        this.verifier = verifier;
+    }
+
+    /**
+     * @return session_key_auth
+     */
+    public byte[] getSessionKeyAuth() {
+        return sessionKeyAuth;
+    }
+
+    /**
+     * @param sessionKeyAuth
+     */
+    public void setSessionKeyAuth(byte[] sessionKeyAuth) {
+        this.sessionKeyAuth = sessionKeyAuth;
+    }
+
+    /**
+     * @return session_key_bnet
+     */
+    public byte[] getSessionKeyBnet() {
+        return sessionKeyBnet;
+    }
+
+    /**
+     * @param sessionKeyBnet
+     */
+    public void setSessionKeyBnet(byte[] sessionKeyBnet) {
+        this.sessionKeyBnet = sessionKeyBnet;
+    }
+
+    /**
+     * @return totp_secret
+     */
+    public byte[] getTotpSecret() {
+        return totpSecret;
+    }
+
+    /**
+     * @param totpSecret
+     */
+    public void setTotpSecret(byte[] totpSecret) {
+        this.totpSecret = totpSecret;
     }
 }

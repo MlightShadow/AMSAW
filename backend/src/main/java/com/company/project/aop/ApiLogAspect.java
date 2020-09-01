@@ -41,6 +41,7 @@ public class ApiLogAspect {
     }
 
     @Before("apiLog()")
+    @TargetDataSource("amsaw")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -66,6 +67,7 @@ public class ApiLogAspect {
         apiLogService.save(log);
     }
 
+    @TargetDataSource("amsaw")
     @AfterReturning(returning = "ret", pointcut = "apiLog()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
