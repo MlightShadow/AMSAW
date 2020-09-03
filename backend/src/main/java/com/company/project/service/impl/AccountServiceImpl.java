@@ -44,6 +44,9 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
 
         byte bexpansion = 0;
         Byte expansion = new Byte(bexpansion);
+        byte[] salt = EncodeUtil.salt();
+        account.setSalt(salt);
+        account.setVerifier(EncodeUtil.verifier(dto.getUsername(), dto.getPassword(), salt));
         account.setRegMail(dto.getRegmail());
         account.setEmail(dto.getRegmail());
         account.setExpansion(expansion);

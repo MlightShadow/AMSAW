@@ -23,7 +23,7 @@ public class DataSourceConfigurer {
 
     @Bean
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.main")
+    @ConfigurationProperties(prefix = "spring.datasource.amsaw")
     public DataSource mainDataSource() {
         return DataSourceBuilder.create().type(DruidDataSource.class).build();
     }
@@ -53,7 +53,7 @@ public class DataSourceConfigurer {
     public DynamicDataSource dataSource() {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = Maps.newHashMap();
-        targetDataSources.put("main", mainDataSource());
+        targetDataSources.put("amsaw", mainDataSource());
         targetDataSources.put("auth", authDataSource());
 
         dynamicDataSource.setDefaultTargetDataSource(mainDataSource());

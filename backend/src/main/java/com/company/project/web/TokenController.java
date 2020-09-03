@@ -52,7 +52,8 @@ public class TokenController {
         if (list.size() == 1) {
             account = list.get(0);
 
-            AuthorizedInfo authInfo = new AuthorizedInfo(account.getId().toString(), account.getUsername(), account.getShaPassHash());
+            AuthorizedInfo authInfo = new AuthorizedInfo(account.getId().toString(), account.getUsername(),
+                    account.getShaPassHash());
             String token = jwtUtil.generateAccessToken(authInfo);
             jwtUtil.putToken(account.getId().toString(), token);
             return ResultGenerator.genSuccessResult(token);
@@ -69,5 +70,10 @@ public class TokenController {
         Account account = accountService.findById(securityContextUtil.getAuthInfo().getId());
 
         return ResultGenerator.genSuccessResult(info);
+    }
+
+    @PostMapping("/rsp6test")
+    public Result<?> rsp6test() {
+        return ResultGenerator.genSuccessResult(EncodeUtil.salt());
     }
 }
