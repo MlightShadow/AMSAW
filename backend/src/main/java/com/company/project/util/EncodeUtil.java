@@ -1,6 +1,7 @@
 package com.company.project.util;
 
 import java.math.BigInteger;
+import java.util.Random;
 import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,9 +20,14 @@ public class EncodeUtil {
     }
 
     public static byte[] salt() {
-        BigInteger res = new BigInteger(StringUtils.upperCase(UUID.randomUUID().toString()).replaceAll("-", "")
-                + StringUtils.upperCase(UUID.randomUUID().toString()).replaceAll("-", "").substring(0, 30), 16);
-        return res.toByteArray();
+        final int size = 32;
+        final String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_";
+        final Random RANDOM = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; ++i) {
+            sb.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+        }
+        return sb.toString().getBytes();
     }
 
     public static byte[] verifier(String username, String password, byte[] salt) {
@@ -33,7 +39,6 @@ public class EncodeUtil {
         BigInteger ih2 = new BigInteger(h2.getBytes());
         BigInteger res = g.modPow(ih2, N);
 
-        byte[] verifier = res.toByteArray();
         return res.toByteArray();
     }
 

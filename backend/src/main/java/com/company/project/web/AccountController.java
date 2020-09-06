@@ -67,22 +67,20 @@ public class AccountController {
     }
 
     @ApiOperation(value = "详情")
-    @ApiIgnore
     @GetMapping("/{id}")
+    @TargetDataSource("auth")
     public Result<?> detail(@PathVariable String id) {
         Account account = accountService.findById(id);
         return ResultGenerator.genSuccessResult(account);
     }
 
     @ApiOperation(value = "列表")
-    @ApiIgnore
     @GetMapping
+    @TargetDataSource("auth")
     public Result<?> list(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        Condition condition = new Condition(Account.class);
-        condition.createCriteria().andCondition("is_deleted=", false);
-        List<Account> list = accountService.findByCondition(condition);
+        List<Account> list = accountService.findAll();
         PageInfo<?> pageInfo = new PageInfo<Account>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
